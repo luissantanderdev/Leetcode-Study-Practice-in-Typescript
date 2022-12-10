@@ -3,31 +3,52 @@ import { ListNode } from '../Data Structures and Algorithms/Models';
 // MARK: 26. Remove Duplicates from Sorted Array
 // URL: https://leetcode.com/problems/remove-duplicates-from-sorted-array/
 function removeDuplicates(nums: number[]): number[] {
+  // Brute Force Solution O(n^2) + O(n^2) = O(2n^2)
   if (nums.length === 1) return nums;
 
-  console.log(nums); 
-
-  let foundDuplicatePtr = -1; 
-
   function swap(a, i, j) {
-      let temp = a[i]; 
-      a[i] = a[j]; 
-      a[j] = temp; 
+    let temp = a[i];
+    a[i] = a[j];
+    a[j] = temp;
   }
 
-
-  let dPtr = -1; 
+  for (let i = 0; i < nums.length; i++) {
+    for (let j = i + 1; j < nums.length; j++) {
+      if (nums[i] != nums[j]) {
+        i = j - 1;
+        break;
+      } else {
+        nums[j] = -101;
+      }
+    }
+  }
 
   for (let i = 1; i < nums.length; i++) {
-
-      if (nums[i] === -101) {
-        
+    if (nums[i] === -101) {
+      for (let j = i; j < nums.length; j++) {
+        if (nums[j] != -101) {
+          swap(nums, i, j);
+          break;
+        }
       }
+    }
   }
 
   console.log(nums);
 
   return nums;
+}
+
+function removeDuplicatesOptimized(nums: number[]): number[] {
+  let picker = 0; 
+
+  for (let i = 1; i < nums.length; i++) {
+      if (nums[i] != nums[picker]) {
+        nums[++picker] = nums[i]
+      }
+  }
+
+  return nums; 
 }
 
 function mergeTwoLists(
@@ -75,9 +96,11 @@ class LeetcodeEasy {
 
   // MARK: 26. Test
   static test26() {
-      const array = [0, 1, -101, -101, 2, -101]; 
+    const array = [1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 6];
+    // const array2 = [0, 1, -101, -101, 2, -101, 3, 4, 5, -101];
 
-      removeDuplicates(array); 
+    // removeDuplicat10es(array);
+    removeDuplicatesOptimized(array); 
   }
 
   static test(): void {
