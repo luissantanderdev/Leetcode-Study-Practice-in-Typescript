@@ -2,7 +2,7 @@ import { ListNode } from '../Data Structures and Algorithms/Models';
 
 // MARK: 26. Remove Duplicates from Sorted Array
 // URL: https://leetcode.com/problems/remove-duplicates-from-sorted-array/
-function removeDuplicates(nums: number[]): number[] {
+function removeDuplicatesBruteForce(nums: number[]): number[] {
   // Brute Force Solution O(n^2) + O(n^2) = O(2n^2)
   if (nums.length === 1) return nums;
 
@@ -39,7 +39,7 @@ function removeDuplicates(nums: number[]): number[] {
   return nums;
 }
 
-function removeDuplicatesOptimized(nums: number[]): number[] {
+function removeDuplicates(nums: number[]): number[] {
   let picker = 0; 
 
   for (let i = 1; i < nums.length; i++) {
@@ -100,7 +100,8 @@ class LeetcodeEasy {
     // const array2 = [0, 1, -101, -101, 2, -101, 3, 4, 5, -101];
 
     // removeDuplicat10es(array);
-    removeDuplicatesOptimized(array); 
+    let res = removeDuplicates(array); 
+    console.log(res);
   }
 
   static test(): void {
