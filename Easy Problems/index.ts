@@ -5,18 +5,27 @@ import { ListNode } from '../Data Structures and Algorithms/Models';
 function removeDuplicates(nums: number[]): number[] {
   if (nums.length === 1) return nums;
 
-  let lp = 0;
-  let rp = lp + 1;
+  console.log(nums); 
 
-  if (nums[lp] === nums[rp]) {
-    nums[rp] = 101;
-    rp++;
+  let foundDuplicatePtr = -1; 
+
+  function swap(a, i, j) {
+      let temp = a[i]; 
+      a[i] = a[j]; 
+      a[j] = temp; 
   }
 
-  if (nums[lp] != nums[rp]) {
-    lp = rp;
-    rp++;
+
+  let dPtr = -1; 
+
+  for (let i = 1; i < nums.length; i++) {
+
+      if (nums[i] === -101) {
+        
+      }
   }
+
+  console.log(nums);
 
   return nums;
 }
@@ -65,10 +74,14 @@ class LeetcodeEasy {
   }
 
   // MARK: 26. Test
-  static test26() {}
+  static test26() {
+      const array = [0, 1, -101, -101, 2, -101]; 
+
+      removeDuplicates(array); 
+  }
 
   static test(): void {
-    const whichTest: number = 1;
+    const whichTest: number = 26;
 
     switch (whichTest) {
       case 1:
