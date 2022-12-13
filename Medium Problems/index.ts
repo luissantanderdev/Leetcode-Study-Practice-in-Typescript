@@ -206,6 +206,31 @@ class LeetcodeMedium {
   }
 
   static test347(): void {
+    function partition(keys, map, left, right): number {
+      let pivot = keys[Math.floor(left + right / 2)];
+      let pivotValue = map.get(pivot);
+
+      let temp1 = keys[pivot];
+      keys[pivot] = keys[right];
+      keys[right] = temp1;
+
+      let index = left;
+
+      for (let i = left; i <= right; i++) {
+        if (map.get(keys[i]) < pivotValue) {
+          temp1 = keys[i];
+          keys[i] = keys[index];
+          keys[index] = temp1;
+          index;
+        }
+      }
+
+      temp1 = keys[right];
+      keys[right] = keys[index];
+      keys[index] = temp1;
+
+      return index;
+    }
 
     function select(
       keys: number[],
@@ -214,9 +239,17 @@ class LeetcodeMedium {
       right: number,
       kSmallest: number
     ) {
+      console.log(map);
+      console.log(keys);
 
+      while (left != right) {
+        let pivot = partition(keys, map, left, right);
 
-      
+        if (kSmallest === pivot) return;
+
+        if (kSmallest < pivot) right = pivot - 1;
+        else left = pivot + 1;
+      }
     }
 
     function topKFrequent(nums: number[], k: number): number[] {
@@ -241,13 +274,20 @@ class LeetcodeMedium {
 
       select(keys, map, 0, mapSize - 1, mapSize - k);
 
-      return [];
+      let kth: number[] = [];
+
+      console.log('Keys: ', keys); ////
+
+      for (let i = mapSize - 1; i >= mapSize - k; i--) {
+        console.log(keys[i]);
+      }
+
+      return kth;
     }
 
-
-    // Testing 347 
+    // Testing 347
     // ----------------------------------
-    const l1 = [1, 1, 2, 2, 2, 3, 3];
+    const l1 = [1, 1, 2, 2, 3, 3];
 
     let res = topKFrequent(l1, 2);
 

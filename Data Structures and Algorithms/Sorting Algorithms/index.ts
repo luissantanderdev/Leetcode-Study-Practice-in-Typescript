@@ -124,7 +124,7 @@ class QuickSort implements Sort {
 
       if (left < index - 1) this.quickSort(obj, left, index - 1);
 
-      // if (index < right) this.quickSort(obj, index, right);
+      if (index < right) this.quickSort(obj, index, right);
     }
   }
 
