@@ -40,15 +40,19 @@ function removeDuplicatesBruteForce(nums: number[]): number[] {
 }
 
 function removeDuplicates(nums: number[]): number[] {
-  let picker = 0; 
+  let picker = 0;
 
   for (let i = 1; i < nums.length; i++) {
-      if (nums[i] != nums[picker]) {
-        nums[++picker] = nums[i]
-      }
+    if (nums[i] != nums[picker]) {
+      nums[++picker] = nums[i];
+    }
   }
 
-  return nums; 
+  return nums;
+}
+
+function removeElement(nums: number[], val: number): number {
+  return [];
 }
 
 function mergeTwoLists(
@@ -95,17 +99,58 @@ class LeetcodeEasy {
   }
 
   // MARK: 26. Test
-  static test26() {
+  static test26(): void {
     const array = [1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 6];
     // const array2 = [0, 1, -101, -101, 2, -101, 3, 4, 5, -101];
 
     // removeDuplicat10es(array);
-    let res = removeDuplicates(array); 
+    let res = removeDuplicates(array);
     console.log(res);
   }
 
+  // MARK: 27
+  static test27(): void {
+    // Function 
+    function removeElement(nums: number[], val: number): number[] {
+      if (val === 0) return nums; 
+
+      let ptr = 0; 
+      let len = nums.length; 
+
+      while (ptr < len) {
+
+        if (nums[ptr] === val) {
+
+          for (let j = ptr; j < len; j++) {
+              if (nums[j] != val) {
+                  // Swap 
+                  let temp = nums[ptr]; 
+                  nums[ptr] = nums[j]; 
+                  nums[j] = temp; 
+                  break; 
+              }
+          }
+        }
+
+        ptr++; 
+      }
+
+      return nums;
+    }
+    
+
+    // Testing 
+    const list1 = [3,2,2,3]; 
+    const val = 3; 
+
+    let res = removeElement(list1, val); 
+
+    console.log(res); 
+
+  }
+
   static test(): void {
-    const whichTest: number = 26;
+    const whichTest: number = 27;
 
     switch (whichTest) {
       case 1:
@@ -113,6 +158,9 @@ class LeetcodeEasy {
         break;
       case 26:
         this.test26();
+        break;
+      case 27:
+        this.test27();
         break;
       default:
         console.log('No Test Selected');
