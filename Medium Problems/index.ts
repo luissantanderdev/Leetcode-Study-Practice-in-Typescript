@@ -254,6 +254,7 @@ class LeetcodeMedium {
 
     function topKFrequent(nums: number[], k: number): number[] {
       let map: Map<number, number> = new Map();
+      let count: Map<number, number[]> = new Map(); 
 
       for (let i = 0; i < nums.length; i++) {
         let value = nums[i];
@@ -268,30 +269,29 @@ class LeetcodeMedium {
       let mapSize: number = map.size;
       const keys: number[] = [];
 
-      for (let [key] of map) {
-        keys.push(key);
+      for (let [key, frequency] of map) {
+          
+
+          if (count.has(frequency)) {
+            let list = count.get(frequency); 
+            
+            list.push(key); 
+
+            // Swap 
+            let temp = list[list.length - 1]; 
+            temp[list.length - 1] = list[list.length - 2]; 
+            temp[list.length - 2] = temp; 
+
+            count.set(frequency, list); 
+
+          } else {
+              let list = []; 
+              list.push(key); 
+              count.set(frequency, list); 
+          }
       }
 
-      select(keys, map, 0, mapSize - 1, mapSize - k);
-
-      let kth: number[] = [];
-
-      console.log('Keys: ', keys); ////
-
-      for (let i = mapSize - 1; i >= mapSize - k; i--) {
-        console.log(keys[i]);
-      }
-
-      return kth;
-    }
-
-    // Testing 347
-    // ----------------------------------
-    const l1 = [1, 1, 2, 2, 3, 3];
-
-    let res = topKFrequent(l1, 2);
-
-    console.log(res);
+      return []; 
   }
 
   static test(): void {
@@ -318,6 +318,8 @@ class LeetcodeMedium {
         console.log('No Test Selected');
     }
   }
+
+  
 }
 
 export default LeetcodeMedium;
