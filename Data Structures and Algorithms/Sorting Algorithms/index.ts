@@ -103,14 +103,21 @@ class QuickSort implements Sort {
       while (rightPtr > 0 && a[--rightPtr] > pivot) {}
 
       if (leftPtr >= rightPtr) break;
-      else this.swap(a, leftPtr, rightPtr);
+      else {
+        const temp: T = a[leftPtr];
+        a[leftPtr] = a[rightPtr];
+        a[rightPtr] = temp;
+      }
     }
 
-    this.swap(a, leftPtr, rightPtr);
+    const temp: T = a[leftPtr];
+    a[leftPtr] = a[rightPtr];
+    a[rightPtr] = temp;
+
     return leftPtr;
   }
 
-  private quickSort<T>(a: T[], left: number, right: number) {
+  private quickSort<T>(a: T[], left: number, right: number): T[] {
     console.log(left, right);
 
     if (right - left <= 0) return;
@@ -123,7 +130,7 @@ class QuickSort implements Sort {
   }
 
   sort<T>(a: T[]) {
-    this.quickSort<T>(a, 0, a.length - 1);
+    a = this.quickSort<T>(a, 0, a.length - 1);
   }
 }
 
