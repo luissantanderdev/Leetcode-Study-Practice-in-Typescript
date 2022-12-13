@@ -117,6 +117,8 @@ class QuickSort implements Sort {
     else {
       let pivot = a[right];
       let partial = this.partition<T>(a, left, right, pivot);
+      this.quickSort(a, left, partial - 1);
+      this.quickSort(a, partial + 1, right);
     }
   }
 
