@@ -87,12 +87,34 @@ class MergeSort implements Sort {
 }
 
 class QuickSort implements Sort {
-  private quickSort<T>(a: T[], left: number, right: number) {
+
+  private partition(a: number[], left: number, right: number, pivot: number) {
+    let leftPtr = left; 
+    let rightPtr = right; 
+
+    while (true) {
+      while (a[++leftPtr] < pivot) {}
+
+      while (rightPtr > 0 && a[--rightPtr] > pivot) {}
+
+      if (leftPtr >= rightPtr) break; 
+      else 
+    }
+  }
+
+
+  private quickSort(a: number[], left: number, right: number) {
     console.log(left, right);
+
+    if (right - left <= 0) return; 
+    else {
+      let pivot = a[right]; 
+      let partial = this.partition(a, left, right, pivot); 
+    }
   }
 
   sort<T>(a: T[]) {
-    this.quickSort(a, 0, a.length);
+    this.quickSort(a, 0, a.length - 1);
   }
 }
 
