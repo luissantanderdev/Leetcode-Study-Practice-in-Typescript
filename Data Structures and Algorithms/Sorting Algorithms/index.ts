@@ -87,8 +87,12 @@ class MergeSort implements Sort {
 }
 
 class QuickSort implements Sort {
+  private quickSort<T>(a: T[], left: number, right: number) {
+    console.log(left, right);
+  }
+
   sort<T>(a: T[]) {
-    throw new Error('Method not implemented.');
+    this.quickSort(a, 0, a.length);
   }
 }
 
@@ -111,7 +115,7 @@ class SortingManager {
 
     let testArray2: number[] = [342, 32, 500, 230];
 
-    const algorithm: number = 3;
+    const algorithm: number = 4;
 
     console.log('Orginal List: ', testArray2);
 
