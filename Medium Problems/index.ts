@@ -205,6 +205,30 @@ class LeetcodeMedium {
     minStack.getMin(); // return -2
   }
 
+  static test347(): void {
+    function topKFrequent(nums: number[], k: number): number[] {
+      let map = new Map();
+
+      for (let i = 0; i < nums.length; i++) {
+        let value = nums[i];
+        if (map.has(value)) {
+          let f = map.get(value);
+          map.set(value, ++f);
+        } else {
+          map.set(value, 1);
+        }
+      }
+
+      return []; 
+    }
+
+    const l1 = [1, 1, 2, 2, 3, 3];
+
+    let res = topKFrequent(l1, 2); 
+
+    console.log(res); 
+  }
+
   static test(): void {
     const whichTest: number = 155;
 
@@ -221,6 +245,9 @@ class LeetcodeMedium {
         break;
       case 155:
         this.test155();
+        break;
+      case 347:
+        this.test347();
         break;
       default:
         console.log('No Test Selected');
