@@ -87,44 +87,49 @@ class MergeSort implements Sort {
 }
 
 class QuickSort implements Sort {
-  private partition<T>(a: T[], left: number, right: number, pivot: T): number {
+  private partition<T>(obj, left: number, right: number): number {
+    let pivot = obj.items[Math.floor((left + right) / 2)];
     let leftPtr = left;
     let rightPtr = right;
 
-    while (true) {
-      while (a[++leftPtr] < pivot) {}
+    while (leftPtr <= rightPtr) {
+      // Find left most element greater than the pivot.
+      while (obj.items[leftPtr] < pivot) {
+        leftPtr++;
+      }
 
-      while (rightPtr > 0 && a[--rightPtr] > pivot) {}
+      // Find the right most element smaller than the pivot.
+      while (obj.items[rightPtr] > pivot) {
+        rightPtr--;
+      }
 
-      if (leftPtr >= rightPtr) break;
-      else {
-        const temp: T = a[leftPtr];
-        a[leftPtr] = a[rightPtr];
-        a[rightPtr] = temp;
+      if (leftPtr <= rightPtr) {
+        // Swap
+        const temp: T = obj.items[leftPtr];
+        obj.items[leftPtr] = obj.items[rightPtr];
+        obj.items[rightPtr] = temp;
+        leftPtr++;
+        rightPtr--;
       }
     }
-
-    const temp: T = a[leftPtr];
-    a[leftPtr] = a[rightPtr];
-    a[rightPtr] = temp;
 
     return leftPtr;
   }
 
-  private quickSort<T>(a: T[], left: number, right: number): T[] {
-    console.log(left, right);
+  private quickSort<T>(obj: { items: T[] }, left: number, right: number) {
+    let index;
 
-    if (right - left <= 0) return a;
-    else {
-      let pivot = a[right];
-      let partial = this.partition<T>(a, left, right, pivot);
-      this.quickSort(a, left, partial - 1);
-      this.quickSort(a, partial + 1, right);
+    if (obj.items.length > 1) {
+      index = this.partition(obj, left, right);
+
+      if (left < index - 1) this.quickSort(obj, left, index - 1);
+
+      // if (index < right) this.quickSort(obj, index, right);
     }
   }
 
   sort<T>(a: T[]) {
-    a = this.quickSort<T>(a, 0, a.length - 1);
+    this.quickSort<T>({ items: a }, 0, a.length - 1);
   }
 }
 
@@ -145,7 +150,8 @@ class SortingManager {
       -1, 342,
     ];
 
-    let testArray2: number[] = [342, 32, 500, 230];
+    // let testArray2: number[] = [342, 32, 500, 230, 1];
+    let testArray2: number[] = [500, 32, 230, 1, 342];
 
     const algorithm: number = 4;
 
@@ -154,11 +160,11 @@ class SortingManager {
     switch (algorithm) {
       case 1:
         SortingManager.setSortingAlgorithm(new InsertionSort());
-        SortingManager.sort(testArray1);
+        SortingManager.sort(testArray2);
         break;
       case 2:
         SortingManager.setSortingAlgorithm(new SelectionSort());
-        SortingManager.sort(testArray1);
+        SortingManager.sort(testArray2);
         break;
       case 3:
         SortingManager.setSortingAlgorithm(new MergeSort());
