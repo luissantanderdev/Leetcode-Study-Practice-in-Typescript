@@ -253,47 +253,72 @@ class LeetcodeMedium {
     }
 
     function topKFrequent(nums: number[], k: number): number[] {
+      if (nums.length === 1) return nums;
+
       let map: Map<number, number> = new Map();
-      let count: Map<number, number[]> = new Map(); 
+      let highestFrequencyInSet = 0;
 
       for (let i = 0; i < nums.length; i++) {
         let value = nums[i];
         if (map.has(value)) {
           let f = map.get(value);
-          map.set(value, ++f);
+
+          highestFrequencyInSet = Math.max(highestFrequencyInSet, ++f);
+
+          map.set(value, f);
         } else {
           map.set(value, 1);
         }
       }
 
-      let mapSize: number = map.size;
-      const keys: number[] = [];
+      let frequencyBuckets = [];
 
-      for (let [key, frequency] of map) {
-          
-
-          if (count.has(frequency)) {
-            let list = count.get(frequency); 
-            
-            list.push(key); 
-
-            // Swap 
-            let temp = list[list.length - 1]; 
-            temp[list.length - 1] = list[list.length - 2]; 
-            temp[list.length - 2] = temp; 
-
-            count.set(frequency, list); 
-
-          } else {
-              let list = []; 
-              list.push(key); 
-              count.set(frequency, list); 
-          }
+      for (let i = 0; i <= highestFrequencyInSet; i++) {
+        frequencyBuckets.push([]);
       }
 
-      return []; 
-  }
+      for (let [value, frequency] of map) {
+        frequencyBuckets[frequency].push(value);
 
+        let list = frequencyBuckets[frequency];
+
+        if (list.length > 1) {
+          // Swap
+          const temp = list[list.length - 1];
+          list[list.length - 1] = list[list.length - 2];
+          list[list.length - 2] = temp;
+
+          frequencyBuckets[frequency] = list;
+        }
+      }
+
+      let res = [];
+
+      for (let i = 0; i < frequencyBuckets.length; i++) {
+        let list = frequencyBuckets.pop();
+
+        while (list.length > 0) {
+          let val = list.pop();
+
+          res.push(val);
+
+          --k;
+
+          if (k === 0) return res;
+        }
+      }
+
+      return res;
+    }
+
+    // Testing
+    let l1 = [7, 10, 11, 5, 2, 5, 5, 7, 11, 8, 9];
+    let k = 4;
+
+    let res = topKFrequent(l1, k);
+
+    console.log(res);
+  }
   static test(): void {
     const whichTest: number = 347;
 
@@ -318,8 +343,6 @@ class LeetcodeMedium {
         console.log('No Test Selected');
     }
   }
-
-  
 }
 
 export default LeetcodeMedium;
