@@ -86,6 +86,12 @@ class MergeSort implements Sort {
   }
 }
 
+class QuickSort implements Sort {
+  sort<T>(a: T[]) {
+    throw new Error('Method not implemented.');
+  }
+}
+
 class SortingManager {
   static selectedSortingAlgorithm: Sort;
 
@@ -117,9 +123,15 @@ class SortingManager {
       case 2:
         SortingManager.setSortingAlgorithm(new SelectionSort());
         SortingManager.sort(testArray1);
+        break;
       case 3:
         SortingManager.setSortingAlgorithm(new MergeSort());
         SortingManager.sort<number>(testArray2);
+        break;
+      case 4:
+        SortingManager.setSortingAlgorithm(new QuickSort());
+        SortingManager.sort<number>(testArray2);
+        break;
       default:
         console.log('Resorting to regular JS sorting');
         testArray1.sort();

@@ -276,7 +276,7 @@ class LeetcodeMedium {
       return [];
     }
 
-    const l1 = [1, 1, 2, 2, 3, 3];
+    const l1 = [1, 1, 2, 2, 2, 3, 3];
 
     let res = topKFrequent(l1, 2);
 
