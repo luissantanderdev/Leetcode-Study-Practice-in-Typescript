@@ -87,12 +87,6 @@ class MergeSort implements Sort {
 }
 
 class QuickSort implements Sort {
-  private swap<T>(a: T[], i1: number, i2: number) {
-    const temp: T = a[i1];
-    a[i1] = a[i2];
-    a[i2] = temp;
-  }
-
   private partition<T>(a: T[], left: number, right: number, pivot: T): number {
     let leftPtr = left;
     let rightPtr = right;
@@ -120,7 +114,7 @@ class QuickSort implements Sort {
   private quickSort<T>(a: T[], left: number, right: number): T[] {
     console.log(left, right);
 
-    if (right - left <= 0) return;
+    if (right - left <= 0) return a;
     else {
       let pivot = a[right];
       let partial = this.partition<T>(a, left, right, pivot);
