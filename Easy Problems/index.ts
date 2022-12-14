@@ -110,43 +110,84 @@ class LeetcodeEasy {
 
   // MARK: 27
   static test27(): void {
-    // Function 
-    function removeElement(nums: number[], val: number): number[] {
-      if (val === 0) return nums; 
+    // Function
+    function removeElement(nums: number[], val: number): number {
+      if (nums.length === 0) return 0;
 
-      let ptr = 0; 
-      let len = nums.length; 
+      let len = nums.length;
+      let ptr = len - 1;
+      let k = 0;
 
-      while (ptr < len) {
+      while (ptr >= 0) {
+        if (nums[ptr] === val) k++;
 
-        if (nums[ptr] === val) {
+        if (nums[ptr] != val) {
+          let i = 0;
 
-          for (let j = ptr; j < len; j++) {
-              if (nums[j] != val) {
-                  // Swap 
-                  let temp = nums[ptr]; 
-                  nums[ptr] = nums[j]; 
-                  nums[j] = temp; 
-                  break; 
-              }
+          while (i != ptr) {
+            if (nums[i] === val) {
+              // Swap
+              let temp = nums[i];
+              nums[i] = nums[ptr];
+              nums[ptr] = temp;
+              k++;
+              break;
+            }
+
+            i++;
           }
         }
 
-        ptr++; 
+        ptr--;
       }
 
-      return nums;
+      return len - k;
     }
-    
 
-    // Testing 
-    const list1 = [3,2,2,3]; 
-    const val = 3; 
+    function removeElementOptimized(nums: number[], val: number): number {
+      let i: number, ptr: number, len: number;
 
-    let res = removeElement(list1, val); 
+      if (nums.length === 0) return 0;
 
-    console.log(res); 
+      len = nums.length;
+      i = 0;
+      ptr = len - 1;
 
+      while (i != ptr) {
+        if (nums[ptr] != val) {
+          if (nums[i] === val) {
+            // Swap
+            let temp = nums[i];
+            nums[i] = nums[ptr];
+            nums[ptr] = temp;
+            ptr--;
+          }
+
+          i++;
+        } else {
+          ptr--;
+        }
+      }
+
+      return ptr;
+    }
+
+    // Testing
+    const list1 = [2, 2, 2, 2, 2, 2, 2];
+    const list2 = [0, 1, 2, 2, 3, 0, 4, 2];
+
+    let res = 0;
+    let testList = list1;
+    let val = 2;
+
+    console.log('Original Array: ', testList);
+    res = removeElementOptimized(testList, val);
+    console.log('Val Removed', res, testList);
+
+    // What the judge sees
+    for (let i = 0; i < res; i++) {
+      console.log(list2[i]);
+    }
   }
 
   static test(): void {
