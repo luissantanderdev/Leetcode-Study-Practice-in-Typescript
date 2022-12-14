@@ -190,43 +190,47 @@ class LeetcodeEasy {
     }
   }
 
-  // MARK: 704: Binary Search 
+  // MARK: 704: Binary Search
   static test704(): void {
-    let result: number, t: number; 
+    let result: number, t: number;
 
     function search(nums: number[], target: number): number {
+      let len = nums.length;
 
-      let len = nums.length; 
+      let left = 0;
+      let right = len - 1;
 
-      let left = 0; 
-      let right = len - 1; 
+      let pivot = Math.floor(right - left / 2);
 
       while (left != right) {
-          let pivot = Math.floor(right - left / 2); 
+        if (target === nums[pivot]) return;
 
-          if (target === nums[pivot]) return 
+        if (target > nums[pivot]) {
+          left = pivot;
 
-          if (target > nums[pivot]) 
-            left = pivot; 
-          else 
-            right = pivot; 
+          // Recalculate Pivot
+          pivot = Math.floor(left + right / 2);
+        } else {
+          right = pivot;
+
+          pivot = Math.floor(right - left / 2);
+        }
       }
 
+      return -1;
+    }
 
+    const tests = [
+      [-1, 0, 3, 5, 9, 12],
+      [-1, 0, 3, 5, 9, 12],
+    ];
 
-      return -1; 
-    };
+    t = 9;
 
-    const tests = [[-1,0,3,5,9,12], [-1,0,3,5,9,12]]; 
+    result = search(tests[0], t);
 
-    t = 9; 
-
-    result = search(tests[0], t); 
-
-    console.log(result); 
-
+    console.log(result);
   }
-
 
   static test(): void {
     const whichTest: number = 704;
@@ -241,9 +245,9 @@ class LeetcodeEasy {
       case 27:
         this.test27();
         break;
-      case 704: 
-        this.test704(); 
-        break; 
+      case 704:
+        this.test704();
+        break;
       default:
         console.log('No Test Selected');
     }
