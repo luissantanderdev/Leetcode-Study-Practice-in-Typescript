@@ -2,12 +2,13 @@ import { ListNode } from '../Data Structures and Algorithms/Models';
 
 // MARK: 26. Remove Duplicates from Sorted Array
 // URL: https://leetcode.com/problems/remove-duplicates-from-sorted-array/
+// Brute Force Solution O(n^2) + O(n^2) = O(2n^2)
 function removeDuplicatesBruteForce(nums: number[]): number[] {
-  // Brute Force Solution O(n^2) + O(n^2) = O(2n^2)
+  let temp: number;
   if (nums.length === 1) return nums;
 
   function swap(a, i, j) {
-    let temp = a[i];
+    temp = a[i];
     a[i] = a[j];
     a[j] = temp;
   }
@@ -40,19 +41,17 @@ function removeDuplicatesBruteForce(nums: number[]): number[] {
 }
 
 function removeDuplicates(nums: number[]): number[] {
-  let picker = 0;
+  let picker: number, i: number;
 
-  for (let i = 1; i < nums.length; i++) {
+  picker = 0;
+
+  for (i = 1; i < nums.length; i++) {
     if (nums[i] != nums[picker]) {
       nums[++picker] = nums[i];
     }
   }
 
   return nums;
-}
-
-function removeElement(nums: number[], val: number): number {
-  return [];
 }
 
 function mergeTwoLists(
@@ -112,17 +111,19 @@ class LeetcodeEasy {
   static test27(): void {
     // Function
     function removeElement(nums: number[], val: number): number {
+      let len: number, ptr: number, k: number, i: number;
+
       if (nums.length === 0) return 0;
 
-      let len = nums.length;
-      let ptr = len - 1;
-      let k = 0;
+      len = nums.length;
+      ptr = len - 1;
+      k = 0;
 
       while (ptr >= 0) {
         if (nums[ptr] === val) k++;
 
         if (nums[ptr] != val) {
-          let i = 0;
+          i = 0;
 
           while (i != ptr) {
             if (nums[i] === val) {
@@ -144,6 +145,7 @@ class LeetcodeEasy {
       return len - k;
     }
 
+    // Optimized Solution
     function removeElementOptimized(nums: number[], val: number): number {
       let i: number, ptr: number, len: number;
 
@@ -195,10 +197,12 @@ class LeetcodeEasy {
     let result: number, t: number;
 
     function search(nums: number[], target: number): number {
-      let len = nums.length;
+      let len: number, left: number, right: number;
 
-      let left = 0;
-      let right = len - 1;
+      len = nums.length;
+
+      left = 0;
+      right = len - 1;
 
       let pivot = Math.floor(right - left / 2);
 
