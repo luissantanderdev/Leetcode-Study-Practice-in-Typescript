@@ -190,6 +190,20 @@ class LeetcodeEasy {
     }
   }
 
+  // MARK: 704: Binary Search 
+  static test704(): void {
+    let result: number, t: number; 
+
+    function search(nums: number[], target: number): number {
+
+      return -1; 
+    };
+
+    const tests = [[-1,0,3,5,9,12], [-1,0,3,5,9,12]]; 
+    
+  }
+
+
   static test(): void {
     const whichTest: number = 27;
 
@@ -203,6 +217,9 @@ class LeetcodeEasy {
       case 27:
         this.test27();
         break;
+      case 704: 
+        this.test704(); 
+        break; 
       default:
         console.log('No Test Selected');
     }
