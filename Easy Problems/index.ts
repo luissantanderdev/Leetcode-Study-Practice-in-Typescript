@@ -197,14 +197,14 @@ class LeetcodeEasy {
     let result: number, t: number;
 
     function search(nums: number[], target: number): number {
-      let len: number, left: number, right: number;
+      let len: number, left: number, right: number, pivot: number;
 
       len = nums.length;
 
       left = 0;
       right = len - 1;
 
-      let pivot = Math.floor(right - left / 2);
+      pivot = Math.floor((right - left) / 2);
 
       while (left != right) {
         if (target === nums[pivot]) return;
@@ -212,12 +212,13 @@ class LeetcodeEasy {
         if (target > nums[pivot]) {
           left = pivot;
 
-          // Recalculate Pivot
-          pivot = Math.floor(left + right / 2);
+          // Recalculate Pivot for the right side. 
+          pivot = Math.floor((left + right) / 2);
         } else {
           right = pivot;
 
-          pivot = Math.floor(right - left / 2);
+          // Recalculate Pivot for the left side.
+          pivot = Math.floor((right - left) / 2);
         }
       }
 
