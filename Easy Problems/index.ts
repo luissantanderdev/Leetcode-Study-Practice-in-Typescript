@@ -212,7 +212,7 @@ class LeetcodeEasy {
         if (target > nums[pivot]) {
           left = pivot;
 
-          // Recalculate Pivot for the right side. 
+          // Recalculate Pivot for the right side.
           pivot = Math.floor((left + right) / 2);
         } else {
           right = pivot;
@@ -237,8 +237,96 @@ class LeetcodeEasy {
     console.log(result);
   }
 
+  // ===================================================================================================================
+  // MARK: 35. Search Insert Position
+  // Submitted 
+  // URL: https://leetcode.com/problems/search-insert-position/submissions/860456433/
+  static test35() {
+    // Function
+    // ---------------------
+    function searchInsert(nums: number[], target: number): number {
+      // Use Binary Search to find the target would be positioned at
+
+      // inclusive range search for example target is 7 and the left = 6 and right = 8 return index between them.
+      // Reference the left side to see
+
+      let left: number,
+        right: number,
+        len: number,
+        pivot: number,
+        pivotValue: number;
+
+      // Set initial Params
+      len = nums.length;
+      left = 0;
+      right = len - 1;
+
+      while (left <= right) {
+        // Set Initial Pivot
+        pivot = left + Math.floor((right - left) / 2);
+
+        console.log(
+          'Before Split',
+          'left=',
+          left,
+          'pivot=',
+          pivot,
+          'right=',
+          right
+        );
+
+        pivotValue = nums[pivot];
+
+        if (pivotValue === target) return pivot;
+
+        if (target > pivotValue) {
+          left = pivot + 1;
+        } else if (target < pivotValue) {
+          right = pivot - 1;
+        }
+
+        // console.log(
+        //   'After Split',
+        //   'left=',
+        //   left,
+        //   'pivot=',
+        //   pivot,
+        //   'right=',
+        //   right
+        // );
+      }
+
+      return left;
+    }
+    // Testing
+    // ---------------------
+    let list: number[] = [1, 3, 5, 6];
+    let target = 5;
+    let n = list.length;
+    // Print
+    console.log('List size n=', n, 'target=', target, list);
+    let res = searchInsert(list, target);
+    console.log('Index Position', res);
+
+    list = [1, 3, 5, 6];
+    target = 1;
+    n = list.length;
+    // Print
+    console.log('List size n=', n, 'target=', target, list);
+    res = searchInsert(list, target);
+    console.log('Index Position', res);
+
+    list = [1, 3, 5, 6];
+    target = 6;
+    n = list.length;
+    // Print
+    console.log('List size n=', n, 'target=', target, list);
+    res = searchInsert(list, target);
+    console.log('Index Position of target=', target, res);
+  }
+
   static test(): void {
-    const whichTest: number = 704;
+    const whichTest: number = 35;
 
     switch (whichTest) {
       case 1:
@@ -249,6 +337,9 @@ class LeetcodeEasy {
         break;
       case 27:
         this.test27();
+        break;
+      case 35:
+        this.test35();
         break;
       case 704:
         this.test704();
