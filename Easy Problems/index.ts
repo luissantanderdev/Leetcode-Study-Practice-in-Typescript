@@ -304,8 +304,70 @@ class LeetcodeEasy {
     console.log('Index Position of target=', target, res);
   }
 
+  // MARK: 135 - Valid Palindrome
+  static test135() {
+    function isAlphaNumeric(str) {
+      var code, i, len;
+
+      for (i = 0, len = str.length; i < len; i++) {
+        code = str.charCodeAt(i);
+        if (
+          !(code > 47 && code < 58) && // numeric (0-9)
+          !(code > 64 && code < 91) && // upper alpha (A-Z)
+          !(code > 96 && code < 123)
+        ) {
+          // lower alpha (a-z)
+          return false;
+        }
+      }
+      return true;
+    }
+
+    function checkIfIsAlphaNumeric(code: number): boolean {
+      if (!(code > 64 && code < 91) && !(code > 96 && code < 123)) return false;
+
+      return true;
+    }
+
+    function isPalindrome(s: string): boolean {
+      let left: number, right: number, leftCode: number, rightCode: number;
+
+      left = 0;
+      right = s.length - 1;
+
+      while (left != right) {
+        let isLeftValid = s.charCodeAt(left);
+        let isRightValid = s.charCodeAt(right);
+
+        console.log(
+          'left=',
+          left,
+          s.charAt(left),
+          checkIfIsAlphaNumeric(isLeftValid)
+        );
+        console.log(
+          'right=',
+          right,
+          s.charAt(right),
+          checkIfIsAlphaNumeric(isRightValid)
+        );
+
+        left++;
+        right--;
+      }
+
+      return true;
+    }
+
+    // Testing
+    // -------------------------
+    const str: string = 'racecar';
+
+    let result = isPalindrome(str);
+  }
+
   static test(): void {
-    const whichTest: number = 35;
+    const whichTest: number = 135;
 
     switch (whichTest) {
       case 1:
@@ -319,6 +381,9 @@ class LeetcodeEasy {
         break;
       case 35:
         this.test35();
+        break;
+      case 135:
+        this.test135();
         break;
       case 704:
         this.test704();
