@@ -239,7 +239,7 @@ class LeetcodeEasy {
 
   // ===================================================================================================================
   // MARK: 35. Search Insert Position
-  // Submitted 
+  // Submitted
   // URL: https://leetcode.com/problems/search-insert-position/submissions/860456433/
   static test35() {
     // Function
@@ -264,17 +264,6 @@ class LeetcodeEasy {
       while (left <= right) {
         // Set Initial Pivot
         pivot = left + Math.floor((right - left) / 2);
-
-        console.log(
-          'Before Split',
-          'left=',
-          left,
-          'pivot=',
-          pivot,
-          'right=',
-          right
-        );
-
         pivotValue = nums[pivot];
 
         if (pivotValue === target) return pivot;
@@ -284,16 +273,6 @@ class LeetcodeEasy {
         } else if (target < pivotValue) {
           right = pivot - 1;
         }
-
-        // console.log(
-        //   'After Split',
-        //   'left=',
-        //   left,
-        //   'pivot=',
-        //   pivot,
-        //   'right=',
-        //   right
-        // );
       }
 
       return left;
