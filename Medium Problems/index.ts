@@ -319,8 +319,80 @@ class LeetcodeMedium {
 
     console.log(res);
   }
+
+
+  // MARK: 
+  static test167() {
+
+    /**
+     *  How it works 
+     *  Example: [2, 7, 11, 15]
+     *    L.                     R
+     *  [ 2 ,    7,      11,     15] 
+     *  
+     *    L.             R
+     *  [ 2,     7,      11,     15]
+     * 
+     *    L      R 
+     *  [ 2,     7,      11,     15]
+     */
+
+
+    function twoSumOptimized(numbers: number[], target: number) {
+      let [left, right]: [number, number] = [0, numbers.length - 1];
+
+      while (right != 0) {
+        if (numbers[left] + numbers[right] === target)
+          return [left + 1, right + 1];
+        if (numbers[left] + numbers[right] < target) left++;
+        if (numbers[left] + numbers[right] > target) right--;
+      }
+
+      return [-1, -1];
+    }
+
+    function twoSum(numbers: number[], target: number): number[] {
+      let [left, right]: [number, number] = [0, numbers.length - 1];
+
+      while (right != 0) {
+        if (left == right) {
+          right--;
+          left = 0;
+        }
+
+        if (numbers[left] + numbers[right] === target)
+          return [left + 1, right + 1];
+
+        left++;
+      }
+
+      return [];
+    }
+
+    const tests = [
+      [2, 7, 11, 15],
+      [2, 3, 4],
+      [-1, 0],
+    ];
+    const targets = [9, 6, -1];
+
+    tests.forEach((val, index) => {
+      console.log(
+        'input=',
+        val,
+        'target=',
+        targets[index],
+        'result=',
+        twoSumOptimized(tests[index], targets[index])
+      );
+    });
+
+    // console.log('target=', 9, 'result=', twoSum(tests[0], 9));
+    // console.log('target=', 6, 'result=', twoSum(tests[1], 6));
+  }
+
   static test(): void {
-    const whichTest: number = 347;
+    const whichTest: number = 167;
 
     switch (whichTest) {
       case 1:
@@ -335,6 +407,9 @@ class LeetcodeMedium {
         break;
       case 155:
         this.test155();
+        break;
+      case 167:
+        this.test167();
         break;
       case 347:
         this.test347();
