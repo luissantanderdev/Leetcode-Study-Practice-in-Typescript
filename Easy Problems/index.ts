@@ -304,56 +304,47 @@ class LeetcodeEasy {
     console.log('Index Position of target=', target, res);
   }
 
+  // =================================================================================================
   // MARK: 135 - Valid Palindrome
+  // Submitted with R: 80ms and M: 47.7mb
+  // URL: https://leetcode.com/problems/valid-palindrome/submissions/860895786/
   static test135() {
-    function isAlphaNumeric(str) {
-      var code, i, len;
-
-      for (i = 0, len = str.length; i < len; i++) {
-        code = str.charCodeAt(i);
-        if (
-          !(code > 47 && code < 58) && // numeric (0-9)
-          !(code > 64 && code < 91) && // upper alpha (A-Z)
-          !(code > 96 && code < 123)
-        ) {
-          // lower alpha (a-z)
-          return false;
-        }
-      }
-      return true;
-    }
-
     function checkIfIsAlphaNumeric(code: number): boolean {
-      if (!(code > 64 && code < 91) && !(code > 96 && code < 123)) return false;
-
-      return true;
+      return !(code > 47 && code < 58) &&
+        !(code > 64 && code < 91) &&
+        !(code > 96 && code < 123)
+        ? false
+        : true;
     }
 
     function isPalindrome(s: string): boolean {
-      let left: number, right: number, leftCode: number, rightCode: number;
+      let left: number,
+        right: number,
+        leftCharCode: number,
+        rightCharCode: number;
+      let isLeftAlpha: boolean, isRightAlpha: boolean;
 
       left = 0;
       right = s.length - 1;
 
-      while (left != right) {
-        let isLeftValid = s.charCodeAt(left);
-        let isRightValid = s.charCodeAt(right);
+      // O(N) complexity
+      while (left <= right) {
+        leftCharCode = s[left].toLowerCase().charCodeAt(0);
+        rightCharCode = s[right].toLowerCase().charCodeAt(0);
+        isLeftAlpha = checkIfIsAlphaNumeric(leftCharCode);
+        isRightAlpha = checkIfIsAlphaNumeric(rightCharCode);
 
-        console.log(
-          'left=',
-          left,
-          s.charAt(left),
-          checkIfIsAlphaNumeric(isLeftValid)
-        );
-        console.log(
-          'right=',
-          right,
-          s.charAt(right),
-          checkIfIsAlphaNumeric(isRightValid)
-        );
+        if (isLeftAlpha && isRightAlpha && leftCharCode - rightCharCode != 0)
+          return false;
 
-        left++;
-        right--;
+        if (leftCharCode === rightCharCode) {
+          left++;
+          right--;
+        } else if (!isLeftAlpha) {
+          left++;
+        } else if (!isRightAlpha) {
+          right--;
+        }
       }
 
       return true;
@@ -361,9 +352,21 @@ class LeetcodeEasy {
 
     // Testing
     // -------------------------
-    const str: string = 'racecar';
+    const str1: string = 'racecax';
+    const str2: string = 'raceca r';
+    const str3: string = ' racecar ';
+    const str4: string = 'Sore was I ere I saw Eros.';
+    let str: string;
+    let result: boolean;
 
-    let result = isPalindrome(str);
+    // str = str1;
+    // result = isPalindrome(str);
+
+    // str = str2;
+    // result = isPalindrome(str);
+
+    str = str4;
+    console.log('result=', isPalindrome(str));
   }
 
   static test(): void {
