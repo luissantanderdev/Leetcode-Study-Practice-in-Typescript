@@ -197,38 +197,29 @@ class LeetcodeEasy {
     let result: number, t: number;
 
     function search(nums: number[], target: number): number {
-      let len: number, left: number, right: number, pivot: number;
+      if (nums.length === 1 && nums[0] === target) return 0;
 
-      len = nums.length;
+      let left: number, right: number;
 
       left = 0;
-      right = len - 1;
+      right = nums.length - 1;
 
-      pivot = Math.floor((right - left) / 2);
+      while (right >= left) {
+        let pivot: number = Math.floor((right + left) / 2);
 
-      while (left != right) {
-        if (target === nums[pivot]) return;
+        if (nums[pivot] === target) return pivot;
 
-        if (target > nums[pivot]) {
-          left = pivot;
-
-          // Recalculate Pivot for the right side.
-          pivot = Math.floor((left + right) / 2);
-        } else {
-          right = pivot;
-
-          // Recalculate Pivot for the left side.
-          pivot = Math.floor((right - left) / 2);
+        if (target < nums[pivot]) {
+          right = pivot - 1;
+        } else if (target > nums[pivot]) {
+          left = pivot + 1;
         }
       }
 
       return -1;
     }
 
-    const tests = [
-      [-1, 0, 3, 5, 9, 12],
-      [-1, 0, 3, 5, 9, 12],
-    ];
+    const tests = [[-1, 0, 3, 5, 9, 12]];
 
     t = 9;
 
@@ -370,7 +361,7 @@ class LeetcodeEasy {
   }
 
   static test(): void {
-    const whichTest: number = 135;
+    const whichTest: number = 704;
 
     switch (whichTest) {
       case 1:
