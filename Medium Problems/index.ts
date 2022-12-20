@@ -481,28 +481,71 @@ class LeetcodeMedium {
     });
   }
 
-
-  // MARK: 74 - Search a 2D Matrix 
+  // MARK: 74 - Search a 2D Matrix
   static test74(): void {
-    // Function 
+    // Brute Force Solution 
+    // Time: O(logn) * O(n) = O(n * logn)
+    // Space: O(1) 
     function searchMatrix(matrix: number[][], target: number): boolean {
+      let len: number = matrix.length;
 
+      let right, left;
 
-      return false; 
-    };
+      left = 0;
+      right = len - 1;
 
+      while (right >= left) {
+        let rowPivot = Math.floor((right + left) / 2);
 
-    let tests = [[[1,3,5,7],[10,11,16,20],[23,30,34,60]],]
-    let targets = [3,]; 
+        if (target === matrix[rowPivot][0]) return true;
+
+        if (target < matrix[rowPivot][0]) {
+          console.log('Scanning the left row ');
+
+          // Brute Force
+          for (let i = 0; i < matrix[left].length; i++)
+            if (target === matrix[left][i]) return true;
+
+          right = rowPivot - 1;
+        } else if (target > matrix[rowPivot][0]) {
+          console.log('Scanning the rowPivot row');
+
+          for (let i = 0; i < matrix[rowPivot].length; i++)
+            if (target === matrix[left][i]) return true;
+
+          left = rowPivot + 1;
+        }
+      }
+
+      return false;
+    }
+
+    let tests = [
+      [
+        [1, 3, 5, 7],
+        [10, 11, 16, 20],
+        [23, 30, 34, 60],
+      ],
+      [
+        [1, 3, 5, 7],
+        [10, 11, 16, 20],
+        [23, 30, 34, 60],
+      ],
+    ];
+    let targets = [3, 34];
 
     tests.forEach((matrix, index) => {
       console.log('test=', index, 'input=', matrix);
 
-      let res = searchMatrix(matrix, targets[index]); 
+      let res = searchMatrix(matrix, targets[index]);
 
-      console.log('does the target exist in the 2d matrix=', res); 
-    })
-
+      console.log(
+        'does the target=',
+        targets[index],
+        'exist in the 2d matrix=',
+        res
+      );
+    });
   }
 
   static test(): void {
@@ -515,9 +558,9 @@ class LeetcodeMedium {
       case 5:
         this.test5();
         break;
-      case 74: 
-        this.test74(); 
-        break; 
+      case 74:
+        this.test74();
+        break;
       case 155:
         this.test155();
         break;
