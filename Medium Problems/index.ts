@@ -483,9 +483,9 @@ class LeetcodeMedium {
 
   // MARK: 74 - Search a 2D Matrix
   static test74(): void {
-    // Brute Force Solution 
+    // Brute Force Solution
     // Time: O(logn) * O(n) = O(n * logn)
-    // Space: O(1) 
+    // Space: O(1)
     function searchMatrix(matrix: number[][], target: number): boolean {
       let len: number = matrix.length;
 
@@ -511,7 +511,71 @@ class LeetcodeMedium {
           console.log('Scanning the rowPivot row');
 
           for (let i = 0; i < matrix[rowPivot].length; i++)
-            if (target === matrix[left][i]) return true;
+            if (target === matrix[rowPivot][i]) return true;
+
+          left = rowPivot + 1;
+        }
+      }
+
+      return false;
+    }
+
+    function searchMatrixOptimized(
+      matrix: number[][],
+      target: number
+    ): boolean {
+      let len: number = matrix.length;
+
+      let right, left;
+      let innerLeft, innerRight;
+
+      left = 0;
+      right = len - 1;
+
+      // Scans the Rows
+      while (right >= left) {
+        let rowPivot = Math.floor((right + left) / 2);
+
+        if (target === matrix[rowPivot][0]) return true;
+
+        if (target < matrix[rowPivot][0]) {
+          console.log('Scanning the left row ');
+
+          innerLeft = 0;
+          innerRight = matrix[left].length - 1;
+
+          // Scan the Columns
+          while (innerRight >= innerLeft) {
+            let innerPivot = Math.floor((innerRight + innerLeft) / 2);
+
+            if (target === matrix[left][innerPivot]) return true;
+
+            if (target < matrix[left][innerPivot]) {
+              innerRight = innerPivot - 1;
+            } else if (target > matrix[left][innerPivot]) {
+              innerLeft = innerLeft + 1;
+            }
+          }
+
+          right = rowPivot - 1;
+        } else if (target > matrix[rowPivot][0]) {
+          console.log('Scanning the rowPivot row');
+
+          innerLeft = 0;
+          innerRight = matrix[rowPivot].length - 1;
+
+          // Scan the Columns
+          while (innerRight >= innerLeft) {
+            let innerPivot = Math.floor((innerRight + innerLeft) / 2);
+
+            if (target === matrix[rowPivot][innerPivot]) return true;
+
+            if (target < matrix[rowPivot][innerPivot]) {
+              innerRight = innerPivot - 1;
+            } else if (target > matrix[rowPivot][innerPivot]) {
+              innerLeft = innerLeft + 1;
+            }
+          }
 
           left = rowPivot + 1;
         }
@@ -537,7 +601,9 @@ class LeetcodeMedium {
     tests.forEach((matrix, index) => {
       console.log('test=', index, 'input=', matrix);
 
-      let res = searchMatrix(matrix, targets[index]);
+      // let res = searchMatrix(matrix, targets[index]);
+
+      let res = searchMatrixOptimized(matrix, targets[index]);
 
       console.log(
         'does the target=',
