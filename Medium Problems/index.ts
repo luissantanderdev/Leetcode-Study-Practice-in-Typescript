@@ -524,10 +524,8 @@ class LeetcodeMedium {
       matrix: number[][],
       target: number
     ): boolean {
+      let right: number, left: number, innerLeft: number, innerRight: number;
       let len: number = matrix.length;
-
-      let right, left;
-      let innerLeft, innerRight;
 
       left = 0;
       right = len - 1;
@@ -546,7 +544,7 @@ class LeetcodeMedium {
 
           // Scan the Columns
           while (innerRight >= innerLeft) {
-            let innerPivot = Math.floor((innerRight + innerLeft) / 2);
+            let innerPivot: number = Math.floor((innerRight + innerLeft) / 2);
 
             if (target === matrix[left][innerPivot]) return true;
 
