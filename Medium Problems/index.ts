@@ -320,23 +320,20 @@ class LeetcodeMedium {
     console.log(res);
   }
 
-
-  // MARK: 
+  // MARK:
   static test167() {
-
     /**
-     *  How it works 
+     *  How it works
      *  Example: [2, 7, 11, 15]
      *    L.                     R
-     *  [ 2 ,    7,      11,     15] 
-     *  
+     *  [ 2 ,    7,      11,     15]
+     *
      *    L.             R
      *  [ 2,     7,      11,     15]
-     * 
-     *    L      R 
+     *
+     *    L      R
      *  [ 2,     7,      11,     15]
      */
-
 
     function twoSumOptimized(numbers: number[], target: number) {
       let [left, right]: [number, number] = [0, numbers.length - 1];
@@ -391,14 +388,101 @@ class LeetcodeMedium {
     // console.log('target=', 6, 'result=', twoSum(tests[1], 6));
   }
 
+  // ===================================================================================================================
+  // MARK: 238 - Product of Array Except Self
+  static test238(): void {
+    // Brute Force Solution My Solution
+    // Time Complexity O(N)
+    // Space Complexity O(N)
+    function productExceptSelf(nums: number[]): number[] {
+      let i: number, j: number, len: number;
+      let prefix: number[], postfix: number[];
+
+      len = nums.length;
+
+      // Create the Prefix Array and The Post Fix Array
+      prefix = Array.apply(null, { length: len }) as number[];
+      postfix = Array.apply(null, { length: len }) as number[];
+
+      // Prefix * Postfix Multiplication
+      for (i = 0, j = len - 1; i < len && j >= 0; i++, j--) {
+        if (i === 0) {
+          prefix[0] = nums[i];
+          postfix[len - 1] = nums[j];
+        } else {
+          prefix[i] = nums[i] * prefix[i - 1];
+          postfix[j] = nums[j] * postfix[j + 1];
+        }
+      }
+
+      let output: number[] = Array.apply(null, { length: len });
+      i = 0;
+
+      while (i < len) {
+        if (i === 0) output[i] = 1 * postfix[i + 1];
+        else if (i + 1 === len) output[i] = prefix[i - 1] * 1;
+        else output[i] = prefix[i - 1] * postfix[i + 1];
+        i++;
+      }
+
+      return output;
+    }
+
+    // Best Case Solution
+    // Time: O(N)
+    // Space: O(1)
+
+    var productExceptSelfOptimized = (nums) => {
+      var carryForward = (nums, products, product = 1) => {
+        for (let index = 0; index < nums.length; index++) {
+          /* Time O(N) */
+          products[index] = product; /* Ignore Auxillary Space O(N) */
+          product *= nums[index];
+        }
+      };
+
+      var carryBackward = (nums, products, product = 1) => {
+        for (let index = nums.length - 1; 0 <= index; index--) {
+          /* Time O(N) */
+          products[index] *= product; /* Ignore Auxillary Space O(N) */
+          product *= nums[index];
+        }
+      };
+
+      const products = new Array(nums.length).fill(
+        1
+      ); /* Ignore Auxillary Space O(N) */
+
+      carryForward(
+        nums,
+        products
+      ); /* Time O(N) | Ignore Auxillary Space O(N) */
+      carryBackward(
+        nums,
+        products
+      ); /* Time O(N) | Ignore Auxillary Space O(N) */
+
+      return products;
+    };
+
+    // Testing
+    const tests = [
+      [1, 2, 3, 4],
+      [-1, 1, 0, -3, 3],
+    ];
+
+    tests.forEach((val, index) => {
+      console.log('test=', index, 'input=', val);
+      // let res = productExceptSelf(val);
+      let res = productExceptSelfOptimized(val);
+      console.log(res);
+    });
+  }
+
   static test(): void {
-    const whichTest: number = 167;
+    const whichTest: number = 238;
 
     switch (whichTest) {
-      case 1:
-        break;
-      case 2:
-        break;
       case 3:
         this.test3();
         break;
@@ -410,6 +494,9 @@ class LeetcodeMedium {
         break;
       case 167:
         this.test167();
+        break;
+      case 238:
+        this.test238();
         break;
       case 347:
         this.test347();
