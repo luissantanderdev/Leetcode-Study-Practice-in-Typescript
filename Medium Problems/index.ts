@@ -481,8 +481,32 @@ class LeetcodeMedium {
     });
   }
 
+
+  // MARK: 74 - Search a 2D Matrix 
+  static test74(): void {
+    // Function 
+    function searchMatrix(matrix: number[][], target: number): boolean {
+
+
+      return false; 
+    };
+
+
+    let tests = [[[1,3,5,7],[10,11,16,20],[23,30,34,60]],]
+    let targets = [3,]; 
+
+    tests.forEach((matrix, index) => {
+      console.log('test=', index, 'input=', matrix);
+
+      let res = searchMatrix(matrix, targets[index]); 
+
+      console.log('does the target exist in the 2d matrix=', res); 
+    })
+
+  }
+
   static test(): void {
-    const whichTest: number = 238;
+    const whichTest: number = 74;
 
     switch (whichTest) {
       case 3:
@@ -491,6 +515,9 @@ class LeetcodeMedium {
       case 5:
         this.test5();
         break;
+      case 74: 
+        this.test74(); 
+        break; 
       case 155:
         this.test155();
         break;
