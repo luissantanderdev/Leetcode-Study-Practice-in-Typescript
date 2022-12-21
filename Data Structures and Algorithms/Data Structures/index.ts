@@ -52,6 +52,12 @@ class LinkedList {
 
     temp.next = null;
   }
+
+  // MARK: Traverse the Linked List 
+  static traverse(list: ListNode<number>) {
+      
+  }
+
 }
 
 export { ArrayList, LinkedList };

@@ -11,7 +11,7 @@ import { SortingManager } from './Data Structures and Algorithms/Sorting Algorit
 const init = () => {
   const btns = document.querySelectorAll('.btn');
 
-  let def: string = 'easy';
+  let def: string = 'ds';
 
   btns.forEach((el) => {
     el.addEventListener('click', (e) => {
@@ -32,6 +32,8 @@ const init = () => {
         break;
       case 'sorting':
         SortingManager.test();
+        break;
+      case 'ds':
         break;
       default:
         console.log('none');
