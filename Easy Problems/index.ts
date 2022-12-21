@@ -403,12 +403,11 @@ class LeetcodeEasy {
 
     let l2 = new ListNode(1, new ListNode(3, new ListNode(4, null)));
 
-
-    let res = mergeTwoLists(l1, l2); 
+    let res = mergeTwoLists(l1, l2);
   }
 
   static test(): void {
-    const whichTest: number = 704;
+    const whichTest: number = 21;
 
     switch (whichTest) {
       case 1:
