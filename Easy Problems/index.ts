@@ -400,6 +400,11 @@ class LeetcodeEasy {
     // TESTING
     // -------------------------
     let l1 = new ListNode(1, new ListNode(2, new ListNode(4, null)));
+
+    let l2 = new ListNode(1, new ListNode(3, new ListNode(4, null)));
+
+
+    let res = mergeTwoLists(l1, l2); 
   }
 
   static test(): void {
