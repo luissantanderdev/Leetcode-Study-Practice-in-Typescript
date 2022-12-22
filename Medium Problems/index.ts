@@ -688,8 +688,48 @@ class LeetcodeMedium {
     });
   }
 
+  static test143(): void {
+    class ListNode {
+      val: number;
+      next: ListNode | null;
+      constructor(val?: number, next?: ListNode | null) {
+        this.val = val === undefined ? 0 : val;
+        this.next = next === undefined ? null : next;
+      }
+    }
+
+    function reorderList(head: ListNode | null): void {
+      let bucket = [];
+
+      let temp = head;
+      temp = temp.next;
+
+      while (temp) {
+        bucket.push(temp);
+        temp = temp.next;
+      }
+
+      let temp2 = head;
+      let i = 0;
+      let j = bucket.length - 1;
+
+      console.log(bucket);
+
+      while (j >= i) {}
+
+      console.log(head);
+    }
+
+    let l1 = new ListNode(
+      1,
+      new ListNode(2, new ListNode(3, new ListNode(4, null)))
+    );
+
+    reorderList(l1);
+  }
+
   static test(): void {
-    const whichTest: number = 74;
+    const whichTest: number = 143;
 
     switch (whichTest) {
       case 3:
@@ -700,6 +740,9 @@ class LeetcodeMedium {
         break;
       case 74:
         this.test74();
+        break;
+      case 143:
+        this.test143();
         break;
       case 155:
         this.test155();
