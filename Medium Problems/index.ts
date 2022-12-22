@@ -699,30 +699,35 @@ class LeetcodeMedium {
     }
 
     function reorderList(head: ListNode | null): void {
-      let bucket = [];
+      const bag = [];
 
-      let temp = head;
+      let temp: ListNode = head;
       temp = temp.next;
 
       while (temp) {
-        bucket.push(temp);
+        bag.push(temp);
         temp = temp.next;
       }
 
-      let temp2 = head;
-      let i = 0;
-      let j = bucket.length - 1;
+      temp = head;
 
-      console.log(bucket);
+      while (bag.length > 0) {
+        temp.next = bag.pop();
+        temp = temp.next;
 
-      while (j >= i) {}
+        if (bag.length > 0) {
+          temp.next = bag.shift();
+          temp = temp.next;
+        }
+      }
 
-      console.log(head);
+      temp.next = null;
     }
 
+    // Testing
     let l1 = new ListNode(
       1,
-      new ListNode(2, new ListNode(3, new ListNode(4, null)))
+      new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5, null))))
     );
 
     reorderList(l1);
