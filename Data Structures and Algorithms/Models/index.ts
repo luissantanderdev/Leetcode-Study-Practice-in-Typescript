@@ -1,4 +1,6 @@
+import { Graph } from './Graph Algorithm Models'; 
 import { Sort } from './Sorting Algorithm Models';
+
 
 class ListNode<T> {
   value: T;
@@ -10,4 +12,4 @@ class ListNode<T> {
   }
 }
 
-export { Sort, ListNode };
+export { Graph, Sort, ListNode };

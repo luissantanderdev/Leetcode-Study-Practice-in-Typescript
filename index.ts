@@ -8,6 +8,8 @@ import { ArrayList } from './Data Structures and Algorithms/Data Structures';
 import { List } from './Data Structures and Algorithms/Interfaces';
 import { SortingManager } from './Data Structures and Algorithms/Sorting Algorithms';
 
+import { GraphManager } from './Data Structures and Algorithms/Graph Algorithms'; 
+
 const init = () => {
   const btns = document.querySelectorAll('.btn');
 
