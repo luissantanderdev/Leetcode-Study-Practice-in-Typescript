@@ -1,12 +1,9 @@
 
 
 
-
-const diagonalSearch = () => {
-
-
+class DiagonalSearch {
+  
 }
-
 
 
 
