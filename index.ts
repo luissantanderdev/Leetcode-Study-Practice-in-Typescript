@@ -8,12 +8,12 @@ import { ArrayList } from './Data Structures and Algorithms/Data Structures';
 import { List } from './Data Structures and Algorithms/Interfaces';
 import { SortingManager } from './Data Structures and Algorithms/Sorting Algorithms';
 
-import { GraphManager } from './Data Structures and Algorithms/Graph Algorithms'; 
+import { GraphManager } from './Data Structures and Algorithms/Graph Algorithms';
 
 const init = () => {
   const btns = document.querySelectorAll('.btn');
 
-  let def: string = 'medium';
+  let def: string = 'graphs';
 
   btns.forEach((el) => {
     el.addEventListener('click', (e) => {
@@ -36,6 +36,9 @@ const init = () => {
         SortingManager.test();
         break;
       case 'ds':
+        break;
+      case 'graphs':
+        GraphManager.test();
         break;
       default:
         console.log('none');

@@ -1,5 +1,5 @@
 interface Graph {
-  traverse();
+  traverse(matrix);
 }
 
 export { Graph };
