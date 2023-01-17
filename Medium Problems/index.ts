@@ -731,10 +731,50 @@ class LeetcodeMedium {
     );
 
     reorderList(l1);
+  } // end
+
+  // ======================================================================================
+  // MARK: Test 38: Longest Substring
+  // Problem: Given a string, find the length of the longest substring without repeating characters.
+
+  // Example: "abccabb" -> the longest is "abc" = 3
+  // Is the substring contigous? -> Yes, look for a substring not a subsequence.
+  // substring vs. subsequence
+  // "[abc]bbd"   - substring does not have breaks it's sequential
+  // "[abc]bb[d]" - subsequence can have breaks in between and such as in the example.
+  // Does case sensitivity matter
+
+  // Step 2: Test Cases
+  // "[abc]c[ab]b" -> 3 Longest
+  // "cccccc" -> 1
+  // "" -> 0
+  // "[ab[c][bda]" -> 4 # account for any overlaps.
+
+  // Step 3: Plan
+  // Generate all possible substrings
+
+  // Good Questions to ask what are the input and it's types what are there outputs you expect
+  // what are expected answers you are looking for on specfic inputs.
+
+  static test38() {
+    const str = 'abcbda';
+    debugger;
+    let max = -1;
+
+    for (let i = 0; i < str.length; i++) {
+      const map = new Map();
+
+      for (let j = i; j < str.length; j++) {
+        console.log(str.charAt(j));
+        if (map.get(str.charAt(j))) break;
+        map.set(str.charAt(j), true);
+      }
+      max = Math.max(max, map.size);
+    }
   }
 
   static test(): void {
-    const whichTest: number = 143;
+    const whichTest: number = 38;
 
     switch (whichTest) {
       case 3:
@@ -742,6 +782,9 @@ class LeetcodeMedium {
         break;
       case 5:
         this.test5();
+        break;
+      case 38:
+        this.test38();
         break;
       case 74:
         this.test74();

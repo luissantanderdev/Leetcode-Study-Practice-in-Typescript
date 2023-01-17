@@ -13,7 +13,7 @@ import { GraphManager } from './Data Structures and Algorithms/Graph Algorithms'
 const init = () => {
   const btns = document.querySelectorAll('.btn');
 
-  let def: string = 'graphs';
+  let def: string = 'medium';
 
   btns.forEach((el) => {
     el.addEventListener('click', (e) => {
@@ -41,7 +41,7 @@ const init = () => {
         GraphManager.test();
         break;
       default:
-        console.log('none');
+        console.log('No Option Selected Please Select an Option');
     }
   }
 
