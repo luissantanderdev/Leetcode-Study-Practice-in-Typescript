@@ -19,8 +19,42 @@ class DepthFirstSearchAlgorithm implements Graph {
     [0, -1], // Left
   ];
 
-  traversalDFS(matrix: number[][]) {
-    const seen = new Array(matrix.length).fill(0);
+  dfs(
+    matrix: number[][],
+    row: number,
+    col: number,
+    seen: boolean[][],
+    values: number[]
+  ) {
+    if (
+      row < 0 ||
+      col < 0 ||
+      row >= matrix.length ||
+      col >= matrix[0].length ||
+      seen[row][col]
+    )
+      return;
+
+    values.push(matrix[row][col]);
+    seen[row][col] = true;
+
+    for (let i = 0; i < this.directions.length; i++) {
+      const currentDir = this.directions[i];
+
+      this.dfs(matrix, row + currentDir[0], col + currentDir[1], seen, values);
+    }
+  }
+
+  traversalDFS(matrix: number[][]): number[] {
+    const seen = new Array(matrix.length).fill(0).map(() => {
+      return new Array(matrix[0].length).fill(false);
+    });
+
+    const values: number[] = [];
+
+    this.dfs(matrix, 0, 0, seen, values);
+
+    return values;
   }
 
   traverse(matrix: any) {
@@ -57,7 +91,7 @@ class GraphManager {
       [16, 17, 18, 19, 20],
     ];
 
-    const algorithm: string = 'right';
+    const algorithm: string = 'dfs';
 
     switch (algorithm) {
       case 'right':
