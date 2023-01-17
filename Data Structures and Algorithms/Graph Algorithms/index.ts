@@ -39,7 +39,7 @@ class DepthFirstSearchAlgorithm implements Graph {
     seen[row][col] = true;
 
     for (let i = 0; i < this.directions.length; i++) {
-      const currentDir = this.directions[i];
+      const currentDir: number[] = this.directions[i];
 
       this.dfs(matrix, row + currentDir[0], col + currentDir[1], seen, values);
     }
